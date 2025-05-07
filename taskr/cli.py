@@ -30,14 +30,3 @@ def list():
     for i, task in enumerate(tasks, 1):
         status = "✔" if task["done"] else "✘"
         click.echo(f"{i}. {task['title']} [ {status} ]")
-
-@cli.command()
-@click.argument("task_number", type=int)
-def done(task_number):
-    tasks = load_tasks()
-    if 0 < task_number <= len(tasks):
-        tasks[task_number - 1]["done"] = True
-        save_tasks(tasks)
-        click.echo(f"Marked task {task_number} as done.")
-    else:
-        click.echo("Invalid task number.")
