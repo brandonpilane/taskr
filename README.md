@@ -146,4 +146,4 @@ None. Uses only:
 
 ## 📄 License
 
-MIT License. See `LICENSE` file for details.
+[MIT](./LICENSE)
