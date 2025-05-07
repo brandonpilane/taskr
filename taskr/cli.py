@@ -16,7 +16,10 @@ def save_tasks(tasks):
 @click.pass_context
 def cli(ctx):
     if ctx.invoked_subcommand is None: # If no subcommand is provided
-        click.echo("Taskr - A simple task manager")
+        click.echo(
+            click.style("TASKR", fg="red", bold=True) + 
+            " - A simple task manager"
+        )
         click.echo(cli.get_help(ctx))  # Show help message
 
 @cli.command()
