@@ -12,15 +12,19 @@ def load_tasks():
 def save_tasks(tasks):
     TASKS_FILE.write_text(json.dumps(tasks, indent=2))
 
-@click.group()
-def cli():
-    pass
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
+    if ctx.invoked_subcommand is None: # If no subcommand is provided
+        click.echo("Taskr - A simple task manager")
+        click.echo(cli.get_help(ctx))  # Show help message
 
 @cli.command()
 @click.argument("title")
 def add(title):
     tasks = load_tasks()
-    tasks.append({"title": title, "done": False})
+    id = len(tasks) + 1
+    tasks.append({"id": id, "title": title, "status":"todo"})
     save_tasks(tasks)
     click.echo(f"Added: {title}")
 
@@ -28,5 +32,5 @@ def add(title):
 def list():
     tasks = load_tasks()
     for i, task in enumerate(tasks, 1):
-        status = "✔" if task["done"] else "✘"
+        status = "✓" if task["done"] else "✕"
         click.echo(f"{i}. {task['title']} [ {status} ]")
