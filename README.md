@@ -9,12 +9,21 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/brandonpilane/taskr">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
-  </a>
-  <a href="https://pypi.org/project/taskr/">
-    <img src="https://img.shields.io/pypi/v/taskr.svg" alt="PyPI version">
-  </a>
+   <a href="https://github.com/brandonpilane/taskr">
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+   </a>
+   <a href="https://github.com/brandonpilane/taskr/issues">
+      <img src="https://img.shields.io/github/issues/brandonpilane/taskr.svg" alt="Issues">
+   </a>
+   <a href="https://github.com/brandonpilane/taskr/pulls">
+      <img src="https://img.shields.io/github/issues-pr/brandonpilane/taskr.svg" alt="Pull Requests">
+   </a>
+   <a href="https://github.com/brandonpilane/taskr/stargazers">
+      <img src="https://img.shields.io/github/stars/brandonpilane/taskr.svg?style=social&label=Star" alt="Stars">
+   </a>
+   <a href="https://twitter.com/intent/tweet?text=Check%20out%20taskr%20by%20%40brandonpilane%20https%3A%2F%2Fgithub.com%2Fbrandonpilane%2Ftaskr%20%F0%9F%91%8D">
+      <img src="https://img.shields.io/twitter/url/https/github.com/brandonpilane/taskr.svg?style=social" alt="Tweet">
+   </a>
 </p>
 
 ---
