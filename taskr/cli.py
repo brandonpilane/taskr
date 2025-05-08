@@ -29,7 +29,7 @@ def add(title):
     id = len(tasks) + 1
     tasks.append({"id": id, "title": title, "status":"todo"})
     save_tasks(tasks)
-    click.echo(f"Added: {title}")
+    click.echo(click.style("Added", fg="green") + f" task {id}: {title}")
 
 @cli.command()
 def list():
