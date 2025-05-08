@@ -139,7 +139,7 @@ taskr/
 
 ## 📦 Dependencies
 
-- `Click`
+- `click`
 - `pathlib`
 - `json`
 - `setuptools`
