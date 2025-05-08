@@ -34,9 +34,23 @@ def add(title):
 @cli.command()
 def list():
     tasks = load_tasks()
+    click.echo("-" * 40)
+    click.echo(f"Total tasks: {len(tasks)}")
+    click.echo(click.style("  Todo: ", fg="yellow") + f"{len([task for task in tasks if task['status'] == 'todo'])}")
+    click.echo(click.style("  In-progress: ", fg="blue") + f"{len([task for task in tasks if task['status'] == 'in-progress'])}")
+    click.echo(click.style("  Done: ", fg="green") + f"{len([task for task in tasks if task['status'] == 'done'])}")
+    click.echo("-" * 40 + "\n")
     for i, task in enumerate(tasks, 1):
-        status = "✓" if task["done"] else "✕"
-        click.echo(f"{i}. {task['title']} [ {status} ]")
+        if task["status"] == "todo":
+            color = "yellow"
+        elif task["status"] == "in-progress":
+            color = "blue"
+        elif task["status"] == "done":
+            color = "green"
+        else:
+            color = "red"
+        click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
+    click.echo("\n" + "-" * 40)
 
 @cli.command()
 @click.argument("id")
