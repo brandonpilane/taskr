@@ -1,16 +1,30 @@
 # `taskr` – A Python CLI Task Tracker
 
-A minimal, dependency-free command-line tool written in Python to track your to-dos directly from the terminal. Create, update, and manage tasks using simple commands — no database or external libraries required. Tasks are stored locally in a JSON file.
+<p align="center"> 
+  <img src="./assets/demo.png" alt="taskr demo" width="600">
+</p>
+
+<p align="center">
+   A minimal, command-line tool written in Python to track your to-dos directly from the terminal. Create, update, and manage tasks using simple commands — no database or external libraries required. Tasks are stored locally in a JSON file.
+</p>
+
+<p align="center">
+  <a href="https://github.com/brandonpilane/taskr">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+  </a>
+  <a href="https://pypi.org/project/taskr/">
+    <img src="https://img.shields.io/pypi/v/taskr.svg" alt="PyPI version">
+  </a>
+</p>
 
 ---
 
 ## Features
 
-* Add, update, and delete tasks
-* Mark tasks as **todo**, **in-progress**, or **done**
-* List all tasks or filter by status
-* Persistent local storage using `tasks.json`
-* Zero dependencies — uses Python's standard library
+- Add, update, and delete tasks
+- Mark tasks as **todo**, **in-progress**, or **done**
+- List all tasks or filter by status
+- Persistent local storage using `tasks.json`
 
 ---
 
@@ -24,15 +38,15 @@ Most task management apps are overkill for simple to-dos. `taskr` gives you the 
 
 ### 🔹 Option 1: Install via `pip`
 
-```bash
-git clone https://github.com/yourusername/taskr.git
+```shell
+git clone https://github.com/brandonpilane/taskr.git
 cd taskr
 pip install .
 ```
 
 Now you can use `taskr` as a command from anywhere:
 
-```bash
+```shell
 taskr add "Write project README"
 ```
 
@@ -46,7 +60,7 @@ taskr add "Write project README"
 
 2. Rename the file to `taskr` (no extension) and make it executable:
 
-   ```bash
+   ```shell
    chmod +x taskr
    mv taskr ~/.local/bin/
    ```
@@ -63,17 +77,15 @@ Each task in `tasks.json` includes:
 {
   "id": 1,
   "description": "Write unit tests",
-  "status": "todo",
-  "createdAt": "2025-05-06T14:00:00Z",
-  "updatedAt": "2025-05-06T14:30:00Z"
+  "status": "todo"
 }
 ```
 
----
+_Note: Status can be "todo", "in-progress", or "done"_
 
 ## 🧪 Usage
 
-```bash
+```shell
 # Add a new task
 taskr add "Refactor codebase"
 
@@ -83,17 +95,17 @@ taskr update 1 "Refactor and document codebase"
 # Delete a task
 taskr delete 1
 
-# Mark a task
-taskr mark-in-progress 2
-taskr mark-done 2
+# Change the status of a task
+taskr status 1 done
+taskr status 4 in-progress
 
 # List all tasks
 taskr list
 
 # List by status
-taskr list todo
-taskr list in-progress
-taskr list done
+taskr list --todo
+taskr list --in-progress
+taskr list --done
 ```
 
 ---
@@ -103,44 +115,76 @@ taskr list done
 ```
 taskr/
 ├── taskr/
-│   └── __main__.py  # Entry point
-├── tasks.json       # Auto-generated task database
-├── setup.py         # For pip install
-└── README.md
+│   ├── __init__.py         # Package initializer
+│   └── cli.py              # Contains CLI logic and commands
+├── LICENSE                 # MIT license
+├── requirements.txt        # Runtime dependencies
+├── .gitignore              # Excludes tasks.json, .venv/, __pycache__/, etc.
+├── tasks.json              # Auto-generated task database (excluded from git)
+├── setup.py                # Package metadata for pip install
+└── README.md               # Project overview and usage
 ```
 
 ---
 
 ## 📦 Dependencies
 
-None. Uses only:
-
-* `argparse`
-* `json`
-* `os`
-* `datetime`
+- `Click`
+- `pathlib`
+- `json`
+- `setuptools`
 
 ---
 
 ## 🧠 Getting Started with Development
 
-1. Fork and clone this repo.
-2. Edit `taskr/__main__.py` to modify CLI behavior.
-3. Run locally with:
+1. **Fork and clone this repo**
 
-   ```bash
-   python -m taskr add "Test a feature"
-   ```
-   
-4. Create a PR with improvements or fixes.
+```shell
+git clone https://github.com/your-username/taskr.git
+cd taskr
+```
+
+2. **(Optional but recommended) Create a virtual environment**
+
+```shell
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+3. **Install dependencies**
+
+```shell
+pip install -r requirements.txt
+```
+
+4. **Install the package in editable mode**
+
+```shell
+pip install -e .
+```
+
+5. **Edit `taskr/cli.py` to improve or customize CLI functionality**
+
+6. **Run the CLI locally**
+
+```shell
+taskr add "Test task"
+taskr list
+taskr done 1
+```
+
+7. **Commit your changes and push your branch**
+
+8. **Create a pull request** with improvements or fixes
 
 ---
 
 ## 💡 Future Ideas
 
-* Tagging system for tasks
-* Due dates and reminders
-* Integration with shell prompts (e.g., show active task)
+- Tagging system for tasks
+- Due dates and reminders
+- Integration with shell prompts (e.g., show active task)
 
 ---
 
