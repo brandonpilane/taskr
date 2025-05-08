@@ -7,7 +7,7 @@
 <p align="center">
    A minimal, command-line tool written in Python to track your to-dos directly from the terminal. Create, update, and manage tasks using simple commands — no database or external libraries required. Tasks are stored locally in a JSON file.
 </p>
-
+<!--
 <p align="center">
    <a href="https://github.com/brandonpilane/taskr">
       <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
@@ -25,7 +25,7 @@
       <img src="https://img.shields.io/twitter/url/https/github.com/brandonpilane/taskr.svg?style=social" alt="Tweet">
    </a>
 </p>
-
+-->
 ---
 
 ## Features
