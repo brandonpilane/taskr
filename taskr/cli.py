@@ -32,26 +32,48 @@ def add(title):
     click.echo(click.style("Added", fg="green") + f" task {id}: {title}")
 
 @cli.command()
-def list():
+@click.option('--status', type=click.Choice(['todo', 'in-progress', 'done']), help='Filter tasks by status')
+def list(status):
     tasks = load_tasks()
-    if len(tasks) == 0:
-        click.echo(click.style("No tasks found", fg="red"))
-        return
-    click.echo(f"Total tasks: {len(tasks)}")
-    click.echo(click.style("  Todo: ", fg="yellow") + f"{len([task for task in tasks if task['status'] == 'todo'])}")
-    click.echo(click.style("  In-progress: ", fg="blue") + f"{len([task for task in tasks if task['status'] == 'in-progress'])}")
-    click.echo(click.style("  Done: ", fg="green") + f"{len([task for task in tasks if task['status'] == 'done'])}")
-    click.echo("")
-    for i, task in enumerate(tasks, 1):
-        if task["status"] == "todo":
-            color = "yellow"
-        elif task["status"] == "in-progress":
-            color = "blue"
-        elif task["status"] == "done":
-            color = "green"
-        else:
-            color = "red"
-        click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
+
+    if status:
+        # Filter tasks by status if the --status option is used
+        filtered_tasks = [task for task in tasks if task["status"] == status]
+
+        color = (
+            "yellow" if status == "todo" else
+            "blue" if status == "in-progress" else
+            "green"
+        )
+
+        if not filtered_tasks:
+            click.echo(click.style(f"No tasks with status '{status}'", fg="red"))
+            return
+
+        click.echo(click.style(f"  {status.capitalize()}: ", fg=color) + f"{len(filtered_tasks)}\n")
+        for i, task in enumerate(filtered_tasks, 1):
+            click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
+
+    else:
+        if not tasks:
+            click.echo(click.style("No tasks found", fg="red"))
+            return
+
+        # Display summary counts
+        click.echo(f"Total tasks: {len(tasks)}")
+        click.echo(click.style("  Todo: ", fg="yellow") + f"{len([t for t in tasks if t['status'] == 'todo'])}")
+        click.echo(click.style("  In-progress: ", fg="blue") + f"{len([t for t in tasks if t['status'] == 'in-progress'])}")
+        click.echo(click.style("  Done: ", fg="green") + f"{len([t for t in tasks if t['status'] == 'done'])}")
+        click.echo()
+
+        # Display all tasks with appropriate colors
+        for i, task in enumerate(tasks, 1):
+            color = (
+                "yellow" if task["status"] == "todo" else
+                "blue" if task["status"] == "in-progress" else
+                "green"
+            )
+            click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
 
 @cli.command()
 @click.argument("id")
