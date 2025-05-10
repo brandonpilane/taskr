@@ -113,9 +113,9 @@ taskr status 4 in-progress
 taskr list
 
 # List by status
-taskr list --todo
-taskr list --in-progress
-taskr list --done
+taskr list --status todo
+taskr list --status in-progress
+taskr list --status done
 ```
 
 ---
