@@ -88,3 +88,20 @@ def update(id, title):
             click.echo(f"Updated task {id}:\n{changed_title}" + click.style(" → ", fg="green") + f"{title}")
             return
     click.echo(f"Task with id {id} not found")
+
+@cli.command()
+@click.argument("id")
+def delete(id):
+    tasks = load_tasks()
+    for i, task in enumerate(tasks):
+        if task["id"] == int(id):
+            tasks.pop(i)
+
+            for j, task in enumerate(tasks):
+                if task["id"] > id:
+                    tasks[j]["id"] -= 1  # Update the IDs of the remaining tasks
+
+            save_tasks(tasks)
+            click.echo(f"Deleted task {id}: {task['title']}")
+            return
+    click.echo(f"Task with id {id} not found")
