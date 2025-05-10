@@ -1,8 +1,9 @@
 import click
 import json
 from pathlib import Path
+from datetime import datetime
 
-TASKS_FILE = Path.home() / ".taskr_tasks.json"  # Better than local file
+TASKS_FILE = Path.home() / ".taskr_tasks.json"
 
 def load_tasks():
     if TASKS_FILE.exists():
@@ -27,7 +28,7 @@ def cli(ctx):
 def add(title):
     tasks = load_tasks()
     id = len(tasks) + 1
-    tasks.append({"id": id, "title": title, "status":"todo"})
+    tasks.append({"id": id, "title": title, "status":"todo", "created_at": datetime.now().isoformat()})
     save_tasks(tasks)
     click.echo(click.style("Added", fg="green") + f" task {id}: {title}")
 
