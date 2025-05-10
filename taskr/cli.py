@@ -96,13 +96,13 @@ def delete(id):
     tasks = load_tasks()
     for i, task in enumerate(tasks):
         if task["id"] == int(id):
+            click.echo(f"Deleted task {id}: {task['title']}")
             tasks.pop(i)
 
             for j, task in enumerate(tasks):
-                if task["id"] > id:
+                if task["id"] > int(id):
                     tasks[j]["id"] -= 1  # Update the IDs of the remaining tasks
 
             save_tasks(tasks)
-            click.echo(f"Deleted task {id}: {task['title']}")
             return
     click.echo(f"Task with id {id} not found")
