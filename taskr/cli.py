@@ -106,3 +106,24 @@ def delete(id):
             save_tasks(tasks)
             return
     click.echo(f"Task with id {id} not found")
+
+@cli.command()
+@click.argument("id")
+@click.argument("status", type=click.Choice(['todo', 'in-progress', 'done']))
+def status(id, status):
+    tasks = load_tasks()
+    color = (
+            "yellow" if status == "todo" else
+            "blue" if status == "in-progress" else
+            "green"
+        )
+    for i, task in enumerate(tasks):
+        if task["id"] == int(id):
+            tasks[i]["status"] = status
+            save_tasks(tasks)
+            click.echo(f"Set status of task {id} to" + click.style(f" {status.capitalize()}", fg=color))
+            return
+    click.echo(f"Task with id {id} not found")
+
+if __name__ == "__main__":
+    cli()
