@@ -84,6 +84,7 @@ def update(id, title):
     for i, task in enumerate(tasks):
         if task["id"] == int(id):
             changed_title = tasks[i]["title"]
+            tasks[i]["updated_at"] = datetime.now().isoformat()
             tasks[i]["title"] = title
             save_tasks(tasks)
             click.echo(f"Updated task {id}:\n{changed_title}" + click.style(" → ", fg="green") + f"{title}")
@@ -120,6 +121,7 @@ def status(id, status):
     for i, task in enumerate(tasks):
         if task["id"] == int(id):
             tasks[i]["status"] = status
+            tasks[i]["updated_at"] = datetime.now().isoformat()
             save_tasks(tasks)
             click.echo(f"Set status of task {id} to" + click.style(f" {status.capitalize()}", fg=color))
             return
