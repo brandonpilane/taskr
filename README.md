@@ -46,6 +46,8 @@ Most task management apps are overkill for simple to-dos. `taskr` gives you the 
 
 ## 🛠 Installation
 
+Assumes you have Python 3.6+ installed.
+
 ### 🔹 Option 1: Install via `pip`
 
 ```shell
@@ -120,6 +122,15 @@ taskr list --status done
 
 ---
 
+## Uninstall
+
+```shell
+pip uninstall taskr
+rm ~/.taskr_tasks.json
+```
+
+---
+
 ## 📂 File Structure
 
 ```
@@ -155,7 +166,7 @@ git clone https://github.com/your-username/taskr.git
 cd taskr
 ```
 
-2. **(Optional but recommended) Create a virtual environment**
+2. **(Optional but _recommended_) Create a virtual environment**
 
 ```shell
 python -m venv .venv
@@ -192,9 +203,10 @@ taskr done 1
 
 ## 💡 Future Ideas
 
-- Tagging system for tasks
-- Due dates and reminders
-- Integration with shell prompts (e.g., show active task)
+- [ ] Tagging system for tasks
+- [ ] Due dates and reminders
+- [ ] Add a notification system
+- [ ] Add a task priority system
 
 ---
 
