@@ -9,7 +9,7 @@
 
 Made with ❤️ by [Brandon Pilane](https://github.com/brandonpilane). Add a ⭐️ to the [repository](https://github.com/brandonpilane/taskr) if you like it!
 
-Made as a learning project for [roadmap.sh](https://roadmap.sh)
+Made as a learning project for [roadmap.sh](https://roadmap.sh/projects/task-tracker)
 
 </p>
 <!--
