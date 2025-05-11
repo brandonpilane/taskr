@@ -34,9 +34,14 @@ def add(title):
 
 @cli.command()
 @click.option('--status', type=click.Choice(['todo', 'in-progress', 'done']), help='Filter tasks by status')
-def list(status):
+@click.option('-v','--verbose', is_flag=True, help='Show detailed task information')
+def list(status, verbose):
     tasks = load_tasks()
 
+    if not tasks:  # If no tasks are found, display an error message
+            click.echo(click.style("No tasks found", fg="red"))
+            return
+    
     if status:
         # Filter tasks by status if the --status option is used
         filtered_tasks = [task for task in tasks if task["status"] == status]
@@ -54,12 +59,15 @@ def list(status):
         click.echo(click.style(f"  {status.capitalize()}: ", fg=color) + f"{len(filtered_tasks)}\n")
         for i, task in enumerate(filtered_tasks, 1):
             click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
+            if verbose:
+                created_time = datetime.fromisoformat(task['created_at'])
+                click.echo(f"    Created: {created_time.strftime('%b %d, %Y at %H:%M')}")
 
+                if( 'updated_at' in task):
+                    updated_time = datetime.fromisoformat(task['updated_at'])
+                    click.echo(f"    Updated: {updated_time.strftime('%b %d, %Y at %H:%M')}")
     else:
-        if not tasks:
-            click.echo(click.style("No tasks found", fg="red"))
-            return
-
+        # If no status filter is provided, show all tasks
         # Display summary counts
         click.echo(f"Total tasks: {len(tasks)}")
         click.echo(click.style("  Todo: ", fg="yellow") + f"{len([t for t in tasks if t['status'] == 'todo'])}")
@@ -75,6 +83,13 @@ def list(status):
                 "green"
             )
             click.echo(f"{i}. {task['title']} (" + click.style(task["status"], fg=color) + ")")
+            if verbose:
+                created_time = datetime.fromisoformat(task['created_at'])
+                click.echo(f"    Created: {created_time.strftime('%b %d, %Y at %H:%M')}")
+
+                if( 'updated_at' in task):
+                    updated_time = datetime.fromisoformat(task['updated_at'])
+                    click.echo(f"    Updated: {updated_time.strftime('%b %d, %Y at %H:%M')}")
 
 @cli.command()
 @click.argument("id")
