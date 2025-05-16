@@ -17,10 +17,9 @@ def save_tasks(tasks):
 @click.pass_context
 def cli(ctx):
     if ctx.invoked_subcommand is None: # If no subcommand is provided
-        click.echo(
-            click.style("TASKR", fg="red", bold=True) + 
-            " - A simple task manager"
-        )
+        # print the ascii art in assets/ascii.txt
+        ascii_file = Path(__file__).parent / "assets" / "ascii.txt"
+        click.echo(ascii_file.read_text())
         click.echo(cli.get_help(ctx))  # Show help message
 
 @cli.command()
